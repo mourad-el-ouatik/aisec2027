@@ -1,0 +1,7 @@
+/* Shared Phase 6 bridge for the legacy sub-sites. */
+:root{--red:var(--morocco);--accent:var(--sunset);--body:var(--font-body);--display:var(--font-display);--mono:var(--font-mono)}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body)!important}
+h1,h2,h3,h4,h5,h6,.nav-brand,.nav-logo,.logo,.btn,.button,.btn-primary,.btn-outline{font-family:var(--font-display)!important}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--signal)!important;outline-offset:3px}
+::selection{background:var(--signal);color:var(--void)}

@@ -1,0 +1,66 @@
+:root{
+  --void:#070A0D;
+  --night:#071B3A;
+  --night-2:#0B2A52;
+  --atlantic:#087E9B;
+  --signal:#28E0D0;
+  --sand:#D6B47A;
+  --sand-deep:#7A5A2E;
+  --sunset:#E47732;
+  --clay:#A95732;
+  --morocco:#C1272D;
+  --ivory:#F4EFE5;
+
+  --bg-dark:var(--night);
+  --bg-darkest:var(--void);
+  --bg-light:var(--ivory);
+  --text-on-dark:var(--ivory);
+  --text-muted-dark:rgba(244,239,229,.72);
+  --text-on-light:#14202B;
+  --text-muted-light:#4B5560;
+  --line-dark:rgba(214,180,122,.22);
+  --line-light:rgba(7,27,58,.16);
+
+  --font-display:'Syncopate',system-ui,sans-serif;
+  --font-body:'Jost',system-ui,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,monospace;
+  --fs-hero:clamp(2.2rem,6vw,5.5rem);
+  --fs-h2:clamp(1.8rem,4vw,3.5rem);
+  --fs-body:1.0625rem;
+  --fs-label:.72rem;
+  --ls-label:.14em;
+
+  --space-1:.25rem;--space-2:.5rem;--space-3:1rem;--space-4:1.5rem;
+  --space-5:2.5rem;--space-6:4rem;--space-7:7rem;
+  --radius-sm:2px;--radius-md:6px;--container:1240px;
+  --glow-signal:0 0 24px rgba(40,224,208,.35);
+  --glow-sunset:0 0 28px rgba(228,119,50,.35);
+  --blur-nav:blur(14px);
+  --overlay-hero-sky:radial-gradient(ellipse 60% 55% at 45% 25%,rgba(7,10,13,.55),transparent 70%);
+  --overlay-hero-tint:linear-gradient(90deg,transparent 20%,rgba(8,126,155,.10) 50%,transparent 85%);
+  --overlay-hero-bottom:linear-gradient(to top,var(--night) 0%,transparent 14%);
+  --ease-out:cubic-bezier(.22,.8,.2,1);
+  --dur-fast:.2s;--dur-med:.6s;--dur-slow:1.2s;
+
+  /* Compatibility aliases for the existing 2026 stylesheet during migration. */
+  --bg:var(--ivory);
+  --bg2:var(--night);
+  --surface:#E9E0D1;
+  --surface2:#D9C8AC;
+  --surface-dark:var(--night-2);
+  --surface-dark2:var(--atlantic);
+  --cyan:var(--atlantic);
+  --cyan2:var(--signal);
+  --green:var(--signal);
+  --red:var(--morocco);
+  --purple:var(--atlantic);
+  --text:var(--text-on-light);
+  --muted:var(--text-muted-light);
+  --muted-dark:var(--text-muted-dark);
+  --border:var(--line-light);
+  --border-dark:var(--line-dark);
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition-duration:.01ms!important}
+}
