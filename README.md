@@ -2,20 +2,20 @@
 
 ```
  █████╗ ██╗███████╗███████╗ ██████╗    ██████╗  ██████╗ ██████╗ ███████╗
-██╔══██╗██║██╔════╝██╔════╝██╔════╝    ╚════██╗██╔═████╗╚════██╗██╔════╝
-███████║██║███████╗█████╗  ██║          █████╔╝██║██╔██║ █████╔╝███████╗
-██╔══██║██║╚════██║██╔══╝  ██║         ██╔═══╝ ████╔╝██║██╔═══╝ ██║══██║
-██║  ██║██║███████║███████╗╚██████╗    ███████╗╚██████╔╝███████╗███████║
-╚═╝  ╚═╝╚═╝╚══════╝╚══════╝ ╚═════╝    ╚══════╝ ╚═════╝ ╚══════╝╚══════╝
+██╔══██╗██║██╔════╝██╔════╝██╔════╝    ╚════██╗██╔═████╗╚════██╗╚════██║
+███████║██║███████╗█████╗  ██║          █████╔╝██║██╔██║ █████╔╝     ██║
+██╔══██║██║╚════██║██╔══╝  ██║         ██╔═══╝ ████╔╝██║██╔═══╝      ██║
+██║  ██║██║███████║███████╗╚██████╗    ███████╗╚██████╔╝███████╗     ██║
+╚═╝  ╚═╝╚═╝╚══════╝╚══════╝ ╚═════╝    ╚══════╝ ╚═════╝ ╚══════╝     ╚═╝
 ```
 
-### `6th Edition` · `15–17 May 2026` · `ENSA Marrakech` · `Morocco`
+### `7th Edition` · `May 2027` · `ENSA Marrakech` · `Morocco`
 
 **AI & Cybersecurity International Summit**  
 *The Premier AI × Security Event in Africa and the Arab World*
 
 [![Live Site](https://img.shields.io/badge/🌐_Live_Site-aisec2026-00f5d4?style=for-the-badge&logoColor=white)](https://mourad-el-ouatik.github.io/aisec2026/)
-[![Edition](https://img.shields.io/badge/Edition-6th-blueviolet?style=for-the-badge)](https://mourad-el-ouatik.github.io/aisec2026/)
+[![Edition](https://img.shields.io/badge/Edition-7th-blueviolet?style=for-the-badge)](https://mourad-el-ouatik.github.io/aisec2026/)
 [![Location](https://img.shields.io/badge/📍_Venue-ENSA_Marrakech-ff6b6b?style=for-the-badge)](https://mourad-el-ouatik.github.io/aisec2026/)
 [![Duration](https://img.shields.io/badge/🗓️_Duration-3_Days-f7b731?style=for-the-badge)](https://mourad-el-ouatik.github.io/aisec2026/)
 
@@ -33,45 +33,9 @@ The summit unites **world-class researchers**, **industry leaders**, **governmen
 
 | `👥 Attendees` | `🎤 Speakers` | `📅 Editions` | `🗓️ Duration` |
 |:-:|:-:|:-:|:-:|
-| **1000+** | **60+** | **6** | **3 Days** |
+| **1000+** | **60+** | **7** | **3 Days** |
 
 </div>
-
----
-
-## ◈ Project Structure
-
-```
-aisec2026/
-│
-├── 📄 index.html          # Main landing page
-├── 🎨 style.css           # Global stylesheet & design tokens
-├── ⚙️  script.js           # Navbar · Slider · Countdown · Tabs
-│
-├── 🖼️  images/             # Logos · Speakers · Editions · Backgrounds
-├── 🔬 conference/          # Scientific Conference sub-site
-├── 🏆 ctf/                 # CTF Competition sub-site
-└── 📜 editions/            # Past editions pages (2021–2025)
-```
-
----
-
-## ◈ Page Sections
-
-<details>
-<summary><strong>🏠 Hero / Home</strong></summary>
-
-Countdown timer to the event, key info (date, venue), and animated hero banner.
-
-</details>
-
-<details>
-<summary><strong>ℹ️ About</strong></summary>
-
-Overview of AiSec's mission and the topics covered:
-`AI Security` · `Machine Learning` · `Threat Intelligence` · `CTF` · `Zero Trust` · `Research`
-
-</details>
 
 <details>
 <summary><strong>📅 Event Program</strong></summary>
@@ -125,7 +89,7 @@ Capture The Flag open to universities, companies & independent hackers.
 <details>
 <summary><strong>📜 Past Editions</strong></summary>
 
-Slider showcasing all 5 editions (2021–2025) with stats and highlights.
+Slider showcasing all 6 editions (2021–2026) with stats and highlights.
 
 </details>
 

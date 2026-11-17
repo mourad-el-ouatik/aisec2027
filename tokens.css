@@ -36,9 +36,9 @@
   --glow-signal:0 0 24px rgba(40,224,208,.35);
   --glow-sunset:0 0 28px rgba(228,119,50,.35);
   --blur-nav:blur(14px);
-  --overlay-hero-sky:radial-gradient(ellipse 60% 55% at 45% 25%,rgba(7,10,13,.55),transparent 70%);
-  --overlay-hero-tint:linear-gradient(90deg,transparent 20%,rgba(8,126,155,.10) 50%,transparent 85%);
-  --overlay-hero-bottom:linear-gradient(to top,var(--night) 0%,transparent 14%);
+  --overlay-hero-sky:radial-gradient(ellipse 60% 55% at 45% 25%,rgba(7,10,13,.12),transparent 70%);
+  --overlay-hero-tint:linear-gradient(90deg,transparent 20%,rgba(8,126,155,.03) 50%,transparent 85%);
+  --overlay-hero-bottom:linear-gradient(to top,rgba(7,10,13,.42) 0%,transparent 20%);
   --ease-out:cubic-bezier(.22,.8,.2,1);
   --dur-fast:.2s;--dur-med:.6s;--dur-slow:1.2s;
 

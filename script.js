@@ -1,4 +1,4 @@
-const AISEC_CONFIG={eventDate:null}; // [À CONFIRMER] ISO date, for example: '2027-05-20T09:00:00+01:00'
+const AISEC_CONFIG={eventDate:'2027-05-09T09:00:00+01:00'}; // [À CONFIRMER] ISO date, for example: '2027-05-20T09:00:00+01:00'
 const navbar=document.getElementById('navbar');
 window.addEventListener('scroll',()=>navbar?.classList.toggle('scrolled',window.scrollY>40),{passive:true});
 document.querySelectorAll('img:not([fetchpriority="high"]):not([loading])').forEach(img=>{img.loading='lazy'});
