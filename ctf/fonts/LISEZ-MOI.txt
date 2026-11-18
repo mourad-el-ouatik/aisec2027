@@ -1,0 +1,3 @@
+Police Shinkansen : déposer ici Shinkansen.woff2 (ou .otf / .ttf).
+Elle est déjà branchée dans css/style.css (@font-face) ; sans le fichier, Orbitron est utilisé en repli.
+Téléchargement : https://www.fontspace.com/shinkansen-font-f108704 (vérifier la licence pour usage commercial).
