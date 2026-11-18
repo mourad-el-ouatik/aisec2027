@@ -1,4 +1,17 @@
 const AISEC_CONFIG={eventDate:'2027-05-09T09:00:00+01:00'}; // [À CONFIRMER] ISO date, for example: '2027-05-20T09:00:00+01:00'
+/* Entry sequence: it is intentionally self-contained so the rest of the site stays untouched. */
+(function initWelcomeGate(){
+  const gate=document.getElementById('welcomeGate');
+  if(!gate)return;
+  const finish=()=>{gate.classList.add('is-leaving');document.body.classList.remove('gate-lock');setTimeout(()=>gate.remove(),850)};
+  document.body.classList.add('gate-lock');
+  document.getElementById('enterSignal')?.addEventListener('click',finish);
+  document.getElementById('skipGate')?.addEventListener('click',finish);
+  window.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key==='Escape') && gate.isConnected)finish()},{once:true});
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){finish();return}
+  /* Safety release: the homepage must never remain locked if an animation is interrupted. */
+  window.setTimeout(()=>{if(gate.isConnected)finish()},6200);
+})();
 const navbar=document.getElementById('navbar');
 window.addEventListener('scroll',()=>navbar?.classList.toggle('scrolled',window.scrollY>40),{passive:true});
 document.querySelectorAll('img:not([fetchpriority="high"]):not([loading])').forEach(img=>{img.loading='lazy'});
@@ -31,16 +44,37 @@ tick();setInterval(tick,1000);
 function switchTab(btn,id){document.querySelectorAll('.tab-btn').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-selected','false')});document.querySelectorAll('.program-content').forEach(c=>c.classList.remove('active'));btn.classList.add('active');btn.setAttribute('aria-selected','true');document.getElementById(id).classList.add('active')}
 let cur=0;
 const track=document.getElementById('editionsTrack');
-const slides=track.querySelectorAll('.edition-slide');
+const slides=track?.querySelectorAll('.edition-slide')||[];
 const dotsEl=document.getElementById('sliderDots');
 function pv(){return window.innerWidth<600?1:window.innerWidth<900?2:3}
-function buildDots(){dotsEl.innerHTML='';const tot=Math.ceil(slides.length/pv());for(let i=0;i<tot;i++){const d=document.createElement('div');d.className='slider-dot'+(i===cur?' active':'');d.onclick=()=>goTo(i);dotsEl.appendChild(d)}}
-function goTo(idx){cur=Math.max(0,Math.min(idx,Math.ceil(slides.length/pv())-1));track.style.transform=`translateX(-${cur*(slides[0].offsetWidth+24)*pv()}px)`;buildDots()}
+function buildDots(){if(!dotsEl)return;dotsEl.innerHTML='';const tot=Math.ceil(slides.length/pv());for(let i=0;i<tot;i++){const d=document.createElement('div');d.className='slider-dot'+(i===cur?' active':'');d.onclick=()=>goTo(i);dotsEl.appendChild(d)}}
+function goTo(idx){if(!track||!slides.length)return;cur=Math.max(0,Math.min(idx,Math.ceil(slides.length/pv())-1));track.style.transform=`translateX(-${cur*(slides[0].offsetWidth+24)*pv()}px)`;buildDots()}
 function slideEditions(d){goTo(cur+d)}
 buildDots();
 window.addEventListener('resize',()=>{buildDots();goTo(0)});
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.1});
 document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+/* Small depth effect for cards and panels. It follows the existing palette through CSS variables. */
+(function initInteractiveDepth(){
+  const targets=document.querySelectorAll('.manifesto-columns>div,.speaker-card,.sponsor-box,.edition-slide,.signal-panel,.timeline-item');
+  targets.forEach(card=>{
+    card.classList.add('interactive-surface');
+    card.addEventListener('pointermove',event=>{
+      const rect=card.getBoundingClientRect();
+      const x=(event.clientX-rect.left)/rect.width;
+      const y=(event.clientY-rect.top)/rect.height;
+      card.style.setProperty('--mx',`${x*100}%`);card.style.setProperty('--my',`${y*100}%`);
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+      card.style.setProperty('--rx',`${(0.5-y)*4}deg`);card.style.setProperty('--ry',`${(x-0.5)*4}deg`);
+    });
+    card.addEventListener('pointerleave',()=>{card.style.removeProperty('--rx');card.style.removeProperty('--ry')});
+  });
+  document.querySelectorAll('.btn-primary,.btn-outline,.gate-enter').forEach(button=>button.addEventListener('click',event=>{
+    const ripple=document.createElement('span');ripple.className='ui-ripple';const rect=button.getBoundingClientRect();
+    ripple.style.left=`${event.clientX-rect.left}px`;ripple.style.top=`${event.clientY-rect.top}px`;button.appendChild(ripple);setTimeout(()=>ripple.remove(),650);
+  }));
+})();
 
 const statObserver=new IntersectionObserver(entries=>{
   entries.forEach(entry=>{
