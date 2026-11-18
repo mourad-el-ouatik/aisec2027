@@ -4,19 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>COMING SOON | AISEC 2027</title>
-  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@300;400;500&family=Syncopate:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../tokens.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #050a0f;
-      --accent: #00e5ff;
-      --accent2: #7b2fff;
-      --text: #e8f0f7;
-      --muted: #6b8099;
-      --font-mono: 'Share Tech Mono', monospace;
-      --font-display: 'Syne', sans-serif;
-      --font-body: 'DM Sans', sans-serif;
+      --bg: var(--void);
+      --accent: var(--sand);
+      --accent2: var(--sunset);
+      --text: var(--ivory);
+      --muted: var(--text-muted-dark);
     }
 
     html, body {
@@ -45,9 +43,9 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 70% 60% at 50% 40%, rgba(0,229,255,.07) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 50% at 80% 80%, rgba(123,47,255,.10) 0%, transparent 60%),
-        linear-gradient(180deg, rgba(5,10,15,.5) 0%, rgba(5,10,15,.85) 60%, rgba(5,10,15,1) 100%);
+        radial-gradient(ellipse 70% 60% at 50% 40%, rgba(214,180,122,.10) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 80% 80%, rgba(228,119,50,.10) 0%, transparent 60%),
+        linear-gradient(180deg, rgba(7,10,13,.5) 0%, rgba(7,10,13,.85) 60%, rgba(7,10,13,1) 100%);
     }
 
     /* Scanline effect */
@@ -108,7 +106,7 @@
       display: inline-flex;
       align-items: center;
       gap: .5rem;
-      background: rgba(0,229,255,.07);
+      background: rgba(214,180,122,.10);
       border: 1px solid rgba(0,229,255,.22);
       border-radius: 999px;
       padding: .35rem 1rem;
@@ -245,8 +243,6 @@
       50%       { opacity: .5; transform: scale(.7); }
     }
 </style>
-  <link rel="stylesheet" href="../tokens.css">
-  <link rel="stylesheet" href="../site-2027.css">
 </head>
 <body>
 

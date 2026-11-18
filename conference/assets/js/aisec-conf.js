@@ -4,17 +4,6 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  // ── Preloader ──────────────────────────────────────────────
-  const preloader = document.getElementById('preloader');
-  if (preloader) {
-    window.addEventListener('load', function () {
-      setTimeout(function () {
-        preloader.classList.add('hidden');
-        setTimeout(function () { preloader.style.display = 'none'; }, 400);
-      }, 300);
-    });
-  }
-
   // ── Navbar scroll ──────────────────────────────────────────
   const nav = document.getElementById('conf-nav');
   if (nav) {
