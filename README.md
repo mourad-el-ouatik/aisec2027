@@ -141,7 +141,6 @@ npx serve .
 
 <div align="center">
 
-`© 2026 AiSec Summit` — All rights reserved.  
-Website built by the **[FOLYO](https://folyo.me) Team**
+`© 2027 AiSec Summit` — All rights reserved.
 
 </div>
