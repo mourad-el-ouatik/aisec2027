@@ -1,18 +1,70 @@
-const AISEC_CONFIG={eventDate:'2027-05-09T09:00:00+01:00'}; // [À CONFIRMER] ISO date, for example: '2027-05-20T09:00:00+01:00'
+const AISEC_CONFIG={
+  eventDate:'2027-05-04T09:00:00+01:00',   // countdown target
+  startDate:'2027-05-04T00:00:00+01:00'    // when the countdown disappears and "Day 01" starts
+};
 const navbar=document.getElementById('navbar');
 window.addEventListener('scroll',()=>navbar?.classList.toggle('scrolled',window.scrollY>40),{passive:true});
 document.querySelectorAll('img:not([fetchpriority="high"]):not([loading])').forEach(img=>{img.loading='lazy'});
 function toggleMenu(){const menu=document.getElementById('mobileMenu');const button=document.getElementById('hamburger');const open=menu?.classList.toggle('open');button?.setAttribute('aria-expanded',String(Boolean(open)))}
 function closeMenu(){document.getElementById('mobileMenu')?.classList.remove('open');document.getElementById('hamburger')?.setAttribute('aria-expanded','false')}
 
-function tick(){
-  if(!AISEC_CONFIG.eventDate)return;
-  const remaining=new Date(AISEC_CONFIG.eventDate).getTime()-Date.now();
-  if(remaining<=0)return;
-  const values={days:Math.floor(remaining/86400000),hours:Math.floor(remaining%86400000/3600000),mins:Math.floor(remaining%3600000/60000),secs:Math.floor(remaining%60000/1000)};
-  Object.entries(values).forEach(([id,value])=>{const el=document.getElementById(id);if(el)el.textContent=String(value).padStart(2,'0')});
+// Lowest common ancestor of the four countdown elements
+function getCountdownBox(){
+  const els=['days','hours','mins','secs'].map(id=>document.getElementById(id)).filter(Boolean);
+  if(!els.length)return null;
+  let node=els[0].parentElement;
+  while(node&&!els.every(el=>node.contains(el)))node=node.parentElement;
+  return node;
 }
-tick();setInterval(tick,1000);
+
+const countdownBox=getCountdownBox();
+let statusEl=null;
+
+function showStatus(text){
+  if(!countdownBox)return;
+  countdownBox.style.display='none';
+  if(!statusEl){
+    statusEl=document.createElement('div');
+    statusEl.className='event-status';
+    statusEl.setAttribute('aria-live','polite');
+    countdownBox.insertAdjacentElement('afterend',statusEl);
+  }
+  if(statusEl.textContent!==text)statusEl.textContent=text;
+}
+
+let timer=null;
+function tick(){
+  const now=Date.now();
+  const start=new Date(AISEC_CONFIG.startDate).getTime();
+
+  // Before May 4, 2027: normal countdown
+  if(now<start){
+    const remaining=new Date(AISEC_CONFIG.eventDate).getTime()-now;
+    const values={
+      days:Math.floor(remaining/86400000),
+      hours:Math.floor(remaining%86400000/3600000),
+      mins:Math.floor(remaining%3600000/60000),
+      secs:Math.floor(remaining%60000/1000)
+    };
+    Object.entries(values).forEach(([id,value])=>{
+      const el=document.getElementById(id);
+      if(el)el.textContent=String(value).padStart(2,'0');
+    });
+    return;
+  }
+
+  // From May 4, 2027: countdown hidden, day labels
+  const dayIndex=Math.floor((now-start)/86400000); // 0 = May 4, 1 = May 5, 2 = May 6
+  if(dayIndex<=2){
+    showStatus('Day '+String(dayIndex+1).padStart(2,'0'));
+  }else{
+    showStatus('7th edition is done');
+    clearInterval(timer); // nothing left to update
+  }
+}
+
+tick();
+timer=setInterval(tick,1000);
 
 function switchTab(btn,id){document.querySelectorAll('.tab-btn').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-selected','false')});document.querySelectorAll('.program-content').forEach(c=>c.classList.remove('active'));btn.classList.add('active');btn.setAttribute('aria-selected','true');document.getElementById(id).classList.add('active')}
 let cur=0;
