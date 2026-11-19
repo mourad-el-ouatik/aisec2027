@@ -721,6 +721,7 @@ img { max-width: 100%; height: auto; }
 @media(max-width: 768px) {
   .nav-links { display: none; }
   .nav-hamburger { display: flex; }
+  .registration-grid { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
   .info-bar-inner { grid-template-columns: 1fr 1fr; }
   .stats-inner { grid-template-columns: 1fr 1fr; }
   .speakers-grid { grid-template-columns: repeat(2, 1fr); }
@@ -731,4 +732,14 @@ img { max-width: 100%; height: auto; }
   .info-bar-inner { grid-template-columns: 1fr; }
   .speakers-grid { grid-template-columns: 1fr; }
   .conf-section { padding: 3.5rem 1.25rem; }
+  .content-card { padding: 1.25rem; }
+  .reg-table-wrap { overflow: visible; }
+  .reg-table { min-width: 0; width: 100%; }
+  .reg-table thead { display: none; }
+  .reg-table, .reg-table tbody, .reg-table tr, .reg-table td { display: block; width: 100%; }
+  .reg-table tr { padding: .7rem 0; border-bottom: 1px solid var(--border); }
+  .reg-table tr:last-child { border-bottom: 0; }
+  .reg-table td { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: .3rem 0; border: 0; }
+  .reg-table td:first-child { color: var(--text); font-weight: 500; padding-bottom: .45rem; }
+  .reg-table td.price::before { content: attr(data-label); color: var(--muted); font-family: var(--font-mono); font-size: .68rem; letter-spacing: 1px; text-transform: uppercase; }
 }

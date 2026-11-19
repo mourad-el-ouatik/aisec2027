@@ -14,6 +14,27 @@
   <link rel="stylesheet" href="../tokens.css">
   <link rel="stylesheet" href="../site-2027.css">
   <link rel="stylesheet" href="assets/css/conf-2027.css">
+  <style>
+    /* Responsive fixes for the registration page (replaces former inline styles) */
+    .registration-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+    .registration-grid > div { min-width: 0; }
+    .btn-row { display: flex; gap: .75rem; flex-wrap: wrap; }
+    .info-grid { display: grid; grid-template-columns: auto 1fr; gap: .55rem 1rem; align-items: baseline; }
+    .info-label { font-size: .78rem; text-transform: uppercase; letter-spacing: .08em; opacity: .55; }
+    .info-mono { font-family: 'Share Tech Mono', 'IBM Plex Mono', monospace; font-size: .88rem; letter-spacing: .04em; overflow-wrap: anywhere; word-break: break-all; }
+    .reg-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .content-card { max-width: 100%; }
+
+    @media (max-width: 900px) {
+      .registration-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
+    @media (max-width: 600px) {
+      .info-grid { grid-template-columns: 1fr; gap: .15rem; }
+      .info-grid .info-label { margin-top: .6rem; }
+      .btn-row .btn-outline, .btn-primary { width: 100%; text-align: center; box-sizing: border-box; }
+      .reg-table th, .reg-table td { padding: .5rem .4rem; font-size: .85rem; }
+    }
+  </style>
 </head>
 <body>
 <div id="preloader">
@@ -42,7 +63,7 @@
 
 <section class="conf-section">
   <div class="section-inner">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:start">
+    <div class="registration-grid">
       <div>
         <div class="section-tag fade-in">Manuscript Preparation</div>
         <h2 class="section-title fade-in" style="margin-bottom:1.25rem">Camera Ready <span class="hl">Submission</span></h2>
@@ -52,7 +73,7 @@
             <li>Use <strong>STRICTLY</strong> the MS-Word templates below (do not request edit permissions)</li>
             <li>Manuscripts must not exceed the page limit specified in the template</li>
           </ul>
-          <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+          <div class="btn-row">
             <a href="https://www.scimetech.com/templates/SciMeTech-submission-template.docx" class="btn-outline" target="_blank"><i class="lni-link"></i> MS Word</a>
           </div>
         </div>
@@ -78,13 +99,13 @@
                 <tr><th>Category</th><th>Early Bird</th><th>Regular</th></tr>
               </thead>
               <tbody>
-                <tr><td>Moroccan Students</td><td class="price">1 200 DH</td><td class="price">1 500 DH</td></tr>
-                <tr><td>Moroccan Academics</td><td class="price">1 500 DH</td><td class="price">1 800 DH</td></tr>
-                <tr><td>International Students</td><td class="price">200 &euro;</td><td class="price">240 &euro;</td></tr>
-                <tr><td>International Academics</td><td class="price">250 &euro;</td><td class="price">290 &euro;</td></tr>
-                <tr><td>Industrials</td><td class="price">280 &euro;</td><td class="price">320 &euro;</td></tr>
-                <tr><td>Scientific committee members</td><td class="price">200 &euro;</td><td class="price">240 &euro;</td></tr>
-                <tr><td>Additional Paper</td><td class="price">50 &euro;</td><td class="price">50 &euro;</td></tr>
+                <tr><td>Moroccan Students</td><td class="price" data-label="Early Bird">1 200 DH</td><td class="price" data-label="Regular">1 500 DH</td></tr>
+                <tr><td>Moroccan Academics</td><td class="price" data-label="Early Bird">1 500 DH</td><td class="price" data-label="Regular">1 800 DH</td></tr>
+                <tr><td>International Students</td><td class="price" data-label="Early Bird">200 &euro;</td><td class="price" data-label="Regular">240 &euro;</td></tr>
+                <tr><td>International Academics</td><td class="price" data-label="Early Bird">250 &euro;</td><td class="price" data-label="Regular">290 &euro;</td></tr>
+                <tr><td>Industrials</td><td class="price" data-label="Early Bird">280 &euro;</td><td class="price" data-label="Regular">320 &euro;</td></tr>
+                <tr><td>Scientific committee members</td><td class="price" data-label="Early Bird">200 &euro;</td><td class="price" data-label="Regular">240 &euro;</td></tr>
+                <tr><td>Additional Paper</td><td class="price" data-label="Early Bird">50 &euro;</td><td class="price" data-label="Regular">50 &euro;</td></tr>
               </tbody>
             </table>
           </div>
@@ -92,26 +113,26 @@
         </div>
         <div class="content-card fade-in" style="margin-top:1.25rem">
           <h3>By Bank Transfert</h3>
-          <div style="display:grid;gap:.6rem;margin-top:.75rem">
-            <div style="display:grid;grid-template-columns:auto 1fr;gap:.55rem 1rem;align-items:baseline">
-              <span style="font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;opacity:.55;white-space:nowrap">Account Holder</span>
+          <div style="margin-top:.75rem">
+            <div class="info-grid">
+              <span class="info-label">Account Holder</span>
               <span style="font-weight:600">Association AMAN</span>
-              <span style="font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;opacity:.55;white-space:nowrap">Account Number</span>
-              <span style="font-family:'Share Tech Mono',monospace;font-size:.88rem;letter-spacing:.04em">MA 145 450 21116 2818251 000 8 63</span>
-              <span style="font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;opacity:.55;white-space:nowrap">Bank</span>
+              <span class="info-label">Account Number</span>
+              <span class="info-mono">MA 145 450 21116 2818251 000 8 63</span>
+              <span class="info-label">Bank</span>
               <span>Banque Populaire</span>
-              <span style="font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;opacity:.55;white-space:nowrap">Branch</span>
+              <span class="info-label">Branch</span>
               <span>Agence CHARAF &mdash; Marrakech (Morocco)</span>
-              <span style="font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;opacity:.55;white-space:nowrap">SWIFT Code</span>
-              <span style="font-family:'Share Tech Mono',monospace;font-size:.88rem;letter-spacing:.04em">BCPOMAMC</span>
+              <span class="info-label">SWIFT Code</span>
+              <span class="info-mono">BCPOMAMC</span>
             </div>
           </div>
         </div>
         <div class="content-card fade-in" style="margin-top:1.25rem">
           <h3>By PayPal</h3>
-          <div style="display:grid;gap:.6rem;margin-top:.75rem">
-            <div style="display:grid;grid-template-columns:auto 1fr;gap:.55rem 1rem;align-items:baseline">
-              <span style="font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;opacity:.55;white-space:nowrap">If you have difficulties, please use this paypal account to send the registration fees (in euros)</span>
+          <div style="margin-top:.75rem">
+            <div class="info-grid">
+              <span class="info-label">If you have difficulties, please use this paypal account to send the registration fees (in euros)</span>
               <a href="https://www.paypal.me/LinaAbouelkalam" class="btn-outline" target="_blank"><i class="lni-link"></i> PayPAl Link</a>
             </div>
           </div>
