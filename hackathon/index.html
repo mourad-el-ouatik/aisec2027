@@ -2,811 +2,159 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HACKATHON | AISEC 2027</title>
-<link rel="shortcut icon" href="../images/logos/aisec2026-w.png" type="image/png">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --bg:#06080f;--accent:#00c8ff;--white:#f0f4ff;--gray:#8892aa;
-  --card:#ffffff08;--border:#ffffff12;
-  --font-head:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;--font-mono:'Share Tech Mono',monospace;
-}
-html{scroll-behavior:smooth}
-body{font-family:var(--font-body);background:var(--bg);color:var(--white);min-height:100vh;overflow-x:hidden}
-#bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
-
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.1rem 3rem;background:rgba(6,8,15,.8);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-.nav-logo-img{height:38px;width:auto;display:block;filter:drop-shadow(0 0 6px rgba(0,200,255,0.3))}
-.nav-logo span{font-family:var(--font-head);font-size:1.1rem;font-weight:800;letter-spacing:.05em;color:var(--white)}
-.nav-logo span.accent{color:var(--accent)}
-.nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{font-size:.83rem;color:var(--gray);text-decoration:none;letter-spacing:.04em;transition:color .2s}
-.nav-links a:hover{color:var(--white)}
-.nav-cta{font-family:var(--font-head);font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--bg);background:var(--accent);padding:9px 20px;border-radius:4px;text-decoration:none;transition:opacity .2s,transform .15s}
-.nav-cta:hover{opacity:.88;transform:translateY(-1px)}
-
-/* HERO */
-#hero{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;padding:7rem 3rem 4rem}
-.hero-inner{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr auto;gap:4rem;align-items:center}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.1em;color:var(--accent);border:1px solid rgba(0,200,255,.25);padding:6px 14px;border-radius:2px;margin-bottom:2rem;animation:fadeUp .7s ease both}
-.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 2s ease infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-.hero-title{font-family:var(--font-head);font-size:clamp(3.5rem,7vw,6.5rem);font-weight:800;line-height:.95;letter-spacing:-.03em;margin-bottom:1.75rem;animation:fadeUp .8s .1s ease both}
-.hero-title .l1{color:var(--white);display:block}
-.hero-title .l2{color:rgba(240,244,255,.3);display:block}
-.hero-title .l3{display:block;background:linear-gradient(90deg,var(--accent) 0%,#4f8ef7 50%,#9b6dff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% auto;animation:shimmer 4s linear infinite}
-@keyframes shimmer{to{background-position:200% center}}
-.hero-sub{font-size:1rem;line-height:1.85;color:var(--gray);max-width:510px;margin-bottom:2.5rem;animation:fadeUp .8s .2s ease both}
-.hero-sub strong{color:var(--white);font-weight:500}
-.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .8s .3s ease both}
-.btn-primary{font-family:var(--font-head);font-weight:700;font-size:.83rem;letter-spacing:.06em;color:var(--bg);background:var(--accent);padding:13px 28px;border-radius:4px;text-decoration:none;transition:opacity .2s,transform .15s;box-shadow:0 0 24px rgba(0,200,255,.2);display:inline-block}
-.btn-primary:hover{opacity:.88;transform:translateY(-2px)}
-.btn-outline{font-family:var(--font-head);font-weight:600;font-size:.83rem;letter-spacing:.06em;color:var(--white);background:transparent;border:1px solid var(--border);padding:13px 24px;border-radius:4px;text-decoration:none;transition:border-color .2s,background .2s}
-.btn-outline:hover{border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.05)}
-.hero-stat-box{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;animation:fadeUp .8s .4s ease both;min-width:210px}
-.hero-stat{background:var(--card);padding:1.5rem 1.75rem;display:flex;flex-direction:column;align-items:center;text-align:center}
-.hero-stat .num{font-family:var(--font-head);font-size:1.9rem;font-weight:800;color:var(--accent);line-height:1}
-.hero-stat .label{font-size:.65rem;color:var(--gray);letter-spacing:.1em;text-transform:uppercase;margin-top:.3rem}
-@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-
-/* INFO BAR */
-.info-bar{position:relative;z-index:1;background:rgba(0,200,255,.05);border-top:1px solid rgba(0,200,255,.15);border-bottom:1px solid rgba(0,200,255,.15)}
-.info-bar-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
-.info-item{padding:1.3rem 1.75rem;display:flex;align-items:center;gap:1rem;border-right:1px solid var(--border)}
-.info-item:last-child{border-right:none}
-.info-icon{width:34px;height:34px;border-radius:6px;background:rgba(0,200,255,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.info-icon i{font-size:1rem;color:var(--accent)}
-.info-text b{display:block;font-size:.78rem;color:var(--white);font-weight:600;margin-bottom:2px}
-.info-text span{font-size:.73rem;color:var(--gray)}
-
-/* SECTIONS */
-.section{position:relative;z-index:1;padding:6rem 3rem}
-.section.alt{background:rgba(255,255,255,.018)}
-.section-inner{max-width:1200px;margin:0 auto}
-.section-tag{display:inline-flex;align-items:center;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:.7rem}
-.section-tag::before{content:'//';margin-right:.5rem;opacity:.4}
-.section-title{font-family:var(--font-head);font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-.025em;margin-bottom:.5rem}
-.hl{color:var(--accent)}
-.section-divider{width:38px;height:2px;background:var(--accent);margin:1.2rem 0 1.65rem;opacity:.55}
-
-/* ABOUT */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
-.about-text p{color:var(--gray);font-size:.95rem;line-height:1.85;margin-bottom:1rem}
-.tags{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.4rem}
-.tag{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.07em;padding:5px 11px;border-radius:3px;border:1px solid}
-.tag-cyan{color:#00c8ff;border-color:rgba(0,200,255,.3);background:rgba(0,200,255,.07)}
-.tag-blue{color:#4f8ef7;border-color:rgba(79,142,247,.3);background:rgba(79,142,247,.07)}
-.tag-purple{color:#9b6dff;border-color:rgba(155,109,255,.3);background:rgba(155,109,255,.07)}
-.tag-green{color:#3cf7a0;border-color:rgba(60,247,160,.3);background:rgba(60,247,160,.07)}
-
-/* STEPS */
-.steps{display:flex;flex-direction:column}
-.step-item{display:flex;gap:1.25rem;padding:1.4rem;border:1px solid var(--border);border-bottom:none;background:var(--card);transition:background .2s}
-.step-item:first-child{border-radius:8px 8px 0 0}
-.step-item:last-child{border-radius:0 0 8px 8px;border-bottom:1px solid var(--border)}
-.step-item:hover{background:rgba(0,200,255,.05)}
-.step-num{font-family:var(--font-mono);font-size:.72rem;color:var(--accent);border:1px solid rgba(0,200,255,.3);border-radius:3px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
-.step-item h4{font-family:var(--font-head);font-size:.9rem;font-weight:700;margin-bottom:.3rem}
-.step-item p{font-size:.82rem;color:var(--gray);line-height:1.65}
-
-/* TRACKS */
-.tracks-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:2.5rem}
-.track-card{background:var(--card);padding:1.85rem 1.4rem;transition:background .25s;cursor:default;position:relative;overflow:hidden}
-.track-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--tc,var(--accent));transform:scaleX(0);transition:transform .3s;transform-origin:left}
-.track-card:hover{background:rgba(255,255,255,.04)}
-.track-card:hover::after{transform:scaleX(1)}
-.track-label{font-family:var(--font-mono);font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tc,var(--accent));margin-bottom:.7rem;opacity:.75}
-.track-icon{width:42px;height:42px;border-radius:7px;background:rgba(255,255,255,.05);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem}
-.track-icon i{font-size:1.4rem;color:var(--tc,var(--accent))}
-.track-card h3{font-family:var(--font-head);font-size:.9rem;font-weight:700;margin-bottom:.45rem}
-.track-card p{font-size:.78rem;color:var(--gray);line-height:1.65}
-
-/* CONTENT CARDS */
-.content-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2.5rem}
-.content-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1.65rem;transition:border-color .2s}
-.content-card:hover{border-color:rgba(0,200,255,.3)}
-.content-card h3{font-family:var(--font-head);font-size:.95rem;font-weight:700;margin-bottom:.7rem}
-.content-card p{font-size:.84rem;color:var(--gray);line-height:1.75}
-.content-card a{color:var(--accent);text-decoration:none}
-.content-card a:hover{text-decoration:underline}
-.mono-tag{font-family:var(--font-mono);font-size:.72rem;color:var(--accent);margin-top:.6rem;display:block;opacity:.8}
-
-/* CTA */
-.cta-section{position:relative;z-index:1;padding:5rem 3rem;text-align:center;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:280px;border-radius:50%;background:radial-gradient(ellipse,rgba(0,200,255,.07),transparent 70%);pointer-events:none}
-.cta-section h2{font-family:var(--font-head);font-size:clamp(1.9rem,4vw,3rem);font-weight:800;letter-spacing:-.025em;margin-bottom:.9rem;position:relative}
-.cta-section p{color:var(--gray);font-size:1rem;margin-bottom:2.25rem;position:relative}
-.cta-section .btn-primary{position:relative;font-size:.88rem;padding:14px 34px}
-
-/* FOOTER */
-footer{position:relative;z-index:1;background:rgba(0,0,0,.4);border-top:1px solid var(--border);padding:3.5rem 3rem}
-.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem}
-.footer-brand .logo{font-family:var(--font-head);font-size:1.3rem;font-weight:800;margin-bottom:.75rem}
-.footer-brand .logo span{color:var(--accent)}
-.footer-brand p{font-size:.8rem;color:var(--gray);line-height:1.85}
-.footer-col h5{font-family:var(--font-head);font-size:.75rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--white);margin-bottom:1rem}
-.footer-col a{display:block;font-size:.8rem;color:var(--gray);text-decoration:none;margin-bottom:.5rem;transition:color .2s}
-.footer-col a:hover{color:var(--white)}
-.footer-bottom{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding-top:1.5rem;border-top:1px solid var(--border);font-size:.73rem;color:var(--gray);flex-wrap:wrap;gap:.5rem}
-.footer-bottom span{color:var(--accent)}
-
-/* SCROLL FADE */
-.fade-in{opacity:0;transform:translateY(16px);transition:opacity .65s ease,transform .65s ease}
-.fade-in.visible{opacity:1;transform:translateY(0)}
-
-/* LOGO IMAGE SIZE ADJUSTMENT – exactly matching dimensions from reference images */
-.logo-img-main {
-  height: 58px;
-  width: auto;
-  display: inline-block;
-  filter: drop-shadow(0 0 8px rgba(0,200,255,0.2));
-  transition: transform 0.2s ease;
-}
-.logo-img-main:hover {
-  transform: scale(1.02);
-}
-
-.hero-logo-img {
-  height: 200px;
-  width: auto;
-  display: block;
-  margin-bottom: 1rem;
-  filter: drop-shadow(0 0 12px rgba(0,200,255,0.25));
-}
-
-.nav-logo-img-custom {
-  height: 42px;
-  width: auto;
-  display: block;
-  filter: drop-shadow(0 0 4px rgba(0,200,255,0.3));
-}
-
-.footer-logo-img {
-  height: 48px;
-  width: auto;
-  display: block;
-  margin-bottom: 12px;
-  filter: drop-shadow(0 0 6px rgba(0,200,255,0.2));
-}
-
-/* responsive tweaks */
-@media(max-width:900px){
-  nav{padding:1rem 1.5rem}.nav-links{display:none}
-  .hero-inner{grid-template-columns:1fr}.hero-stat-box{display:none}
-  #hero{padding:6rem 1.5rem 3rem}
-  .info-bar-inner{grid-template-columns:1fr 1fr}
-  .info-item{border-bottom:1px solid var(--border)}
-  .about-grid,.tracks-grid,.content-cards{grid-template-columns:1fr}
-  .section{padding:4rem 1.5rem}
-  .footer-inner{grid-template-columns:1fr 1fr;gap:2rem}
-  .hero-logo-img{height: 55px;}
-  .logo-img-main{height: 48px;}
-}
-
-
-
-
-/* ═══════════════════════════════════════════
-   SHIELD PRELOADER — BLUE TEAM
-═══════════════════════════════════════════ */
-#bt-preloader {
-  position: fixed; inset: 0; z-index: 9999;
-  background: #020d1a;
-  display: flex; align-items: center; justify-content: center;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-/* Matrix rain canvas sits behind everything */
-#bt-matrix {
-  position: absolute; inset: 0;
-  z-index: 0; pointer-events: none;
-  opacity: .55;
-}
-
-/* Center content */
-.bt-center {
-  position: relative; z-index: 2;
-  display: flex; flex-direction: column;
-  align-items: center; gap: 2.2rem;
-}
-
-/* ── SVG Shield wrapper ── */
-.bt-shield-wrap {
-  position: relative;
-  width: 160px; height: 160px;
-  display: flex; align-items: center; justify-content: center;
-}
-
-/* Outer pulse rings */
-.bt-ring {
-  position: absolute; border-radius: 50%;
-  border: 1px solid rgba(0,200,255,.25);
-  animation: ringPulse 3s ease-in-out infinite;
-}
-.bt-ring-1 { width: 220px; height: 220px; animation-delay: 0s;    border-color: rgba(0,200,255,.2); }
-.bt-ring-2 { width: 280px; height: 280px; animation-delay: .6s;   border-color: rgba(0,200,255,.12); }
-.bt-ring-3 { width: 340px; height: 340px; animation-delay: 1.2s;  border-color: rgba(0,200,255,.06); }
-@keyframes ringPulse {
-  0%,100% { transform: scale(1);    opacity: 1; }
-  50%     { transform: scale(1.06); opacity: .4; }
-}
-
-/* Shield SVG */
-#bt-shield-svg {
-  width: 140px; height: 140px;
-  filter: drop-shadow(0 0 24px rgba(0,200,255,.7))
-          drop-shadow(0 0 60px rgba(0,200,255,.3));
-  animation: shieldFloat 4s ease-in-out infinite;
-}
-@keyframes shieldFloat {
-  0%,100% { transform: translateY(0px);  }
-  50%     { transform: translateY(-10px);}
-}
-
-/* Shield path fill animation */
-#shield-path {
-  stroke-dasharray: 400;
-  stroke-dashoffset: 400;
-  animation: drawShield 1.4s ease forwards .2s;
-}
-@keyframes drawShield {
-  to { stroke-dashoffset: 0; }
-}
-
-/* Shield fill glow animation */
-#shield-fill {
-  opacity: 0;
-  animation: fillShield .8s ease forwards 1.2s;
-}
-@keyframes fillShield {
-  to { opacity: 1; }
-}
-
-/* Lock icon inside shield */
-#shield-lock {
-  opacity: 0;
-  animation: lockAppear .5s ease forwards 1.8s;
-}
-@keyframes lockAppear {
-  from { opacity: 0; transform: translateY(6px) scale(.8); }
-  to   { opacity: 1; transform: translateY(0)   scale(1);  }
-}
-
-/* ── Labels ── */
-.bt-label {
-  text-align: center;
-  font-family: 'Share Tech Mono', monospace;
-}
-.bt-label-title {
-  font-size: 1rem; letter-spacing: 6px;
-  text-transform: uppercase; color: #00c8ff;
-  text-shadow: 0 0 20px rgba(0,200,255,.8);
-  opacity: 0;
-  animation: labelUp .6s ease forwards 1.6s;
-}
-.bt-label-sub {
-  margin-top: .45rem;
-  font-size: .58rem; letter-spacing: 3.5px;
-  text-transform: uppercase; color: rgba(0,200,255,.45);
-  opacity: 0;
-  animation: labelUp .6s ease forwards 1.9s;
-}
-@keyframes labelUp {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ── Progress bar ── */
-.bt-bar-wrap {
-  width: 260px; position: relative;
-}
-.bt-bar-track {
-  height: 2px; background: rgba(0,200,255,.12);
-  overflow: hidden; position: relative;
-}
-.bt-bar-fill {
-  height: 100%; width: 0%;
-  background: linear-gradient(90deg, #004466, #00c8ff);
-  box-shadow: 0 0 12px rgba(0,200,255,.7);
-  transition: width .4s ease;
-}
-.bt-bar-labels {
-  display: flex; justify-content: space-between; margin-top: .5rem;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: .55rem; letter-spacing: 2.5px;
-  color: rgba(0,200,255,.35); text-transform: uppercase;
-}
-#bt-pct { color: #00c8ff; }
-
-</style>
-<link rel="stylesheet" href="../tokens.css">
-<link rel="stylesheet" href="../site-2027.css">
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="description" content="Hack The Intelligence — the national innovation hackathon of AISEC 2027, 7th edition. The future rises from Sahara dunes.">
+<meta name="theme-color" content="#071B3A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23071B3A'/%3E%3Cpath d='M50 18L66 78 22 46H78L34 78Z' fill='none' stroke='%23D6B47A' stroke-width='6' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="fonts/fa/all.min.css">
+<link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body class="loading">
 
-
-<!-- ══ SHIELD PRELOADER ══ -->
-<div id="bt-preloader">
-
-  <!-- Matrix Rain canvas -->
-  <canvas id="bt-matrix"></canvas>
-
-  <!-- Centered content -->
-  <div class="bt-center">
-
-    <!-- Shield + rings -->
-    <div class="bt-shield-wrap">
-      <div class="bt-ring bt-ring-1"></div>
-      <div class="bt-ring bt-ring-2"></div>
-      <div class="bt-ring bt-ring-3"></div>
-
-      <svg id="bt-shield-svg" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
-        <!-- Glow filter -->
-        <defs>
-          <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
-            <feGaussianBlur stdDeviation="3.5" result="blur"/>
-            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-          <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%"   stop-color="#004d77"/>
-            <stop offset="100%" stop-color="#00c8ff" stop-opacity=".25"/>
-          </linearGradient>
-        </defs>
-
-        <!-- Shield fill (revealed after draw) -->
-        <path id="shield-fill"
-          d="M50 4 L92 20 L92 52 Q92 82 50 106 Q8 82 8 52 L8 20 Z"
-          fill="url(#shieldGrad)"
-          filter="url(#glow)"
-        />
-
-        <!-- Shield outline drawn -->
-        <path id="shield-path"
-          d="M50 4 L92 20 L92 52 Q92 82 50 106 Q8 82 8 52 L8 20 Z"
-          fill="none"
-          stroke="#00c8ff"
-          stroke-width="2.2"
-          stroke-linejoin="round"
-          filter="url(#glow)"
-        />
-
-        <!-- Inner highlight line -->
-        <path
-          d="M50 12 L84 26 L84 52 Q84 76 50 97"
-          fill="none" stroke="rgba(0,200,255,.18)" stroke-width="1"
-          opacity="0"
-          style="opacity:0;animation:fillShield .8s ease forwards 1.4s"
-        />
-
-        <!-- Lock icon inside shield -->
-        <g id="shield-lock" transform="translate(50,54)">
-          <!-- Lock body -->
-          <rect x="-13" y="-5" width="26" height="20" rx="3"
-            fill="none" stroke="#00c8ff" stroke-width="2"
-            filter="url(#glow)"
-          />
-          <!-- Lock shackle -->
-          <path d="M-8,-5 L-8,-13 Q-8,-20 0,-20 Q8,-20 8,-13 L8,-5"
-            fill="none" stroke="#00c8ff" stroke-width="2"
-            stroke-linecap="round"
-          />
-          <!-- Keyhole dot -->
-          <circle cx="0" cy="5" r="3" fill="#00c8ff" filter="url(#glow)"/>
-          <!-- Keyhole stem -->
-          <rect x="-1.5" y="5" width="3" height="5" rx="1" fill="#00c8ff"/>
-        </g>
-      </svg>
-    </div>
-
-    <!-- Label -->
-    <div class="bt-label">
-      <div class="bt-label-title">AISEC 2026</div>
-      <div class="bt-label-sub">Availability // Integrity // Confidentiality</div>
-    </div>
-
-    <!-- Progress bar -->
-    <div class="bt-bar-wrap">
-      <div class="bt-bar-track">
-        <div class="bt-bar-fill" id="bt-prog"></div>
-      </div>
-      <div class="bt-bar-labels">
-        <span>Initializing</span>
-        <span id="bt-pct">0%</span>
-      </div>
-    </div>
-
+<!-- Décor fixe : ciel, soleil, dunes -->
+<div class="scene" aria-hidden="true">
+  <div class="sun"></div>
+  <div class="dunes">
+    <svg class="dune d1" viewBox="0 0 1440 400" preserveAspectRatio="none"><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c9743f" stop-opacity=".75"/><stop offset="1" stop-color="#1c2f4d"/></linearGradient></defs>
+      <path d="M0 210C180 140 330 190 520 150S860 100 1060 160 1340 190 1440 130V400H0Z" fill="url(#g1)"/><path d="M0 210C180 140 330 190 520 150S860 100 1060 160 1340 190 1440 130" fill="none" stroke="#E47732" stroke-opacity=".55" stroke-width="2"/></svg>
+    <svg class="dune d2" viewBox="0 0 1440 400" preserveAspectRatio="none"><defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D6B47A" stop-opacity=".9"/><stop offset=".35" stop-color="#8a5f30"/><stop offset="1" stop-color="#1d1409"/></linearGradient></defs>
+      <path d="M0 280C220 200 420 290 640 235S1010 170 1200 245 1400 260 1440 225V400H0Z" fill="url(#g2)"/><path d="M0 280C220 200 420 290 640 235S1010 170 1200 245 1400 260 1440 225" fill="none" stroke="#f3d9a4" stroke-opacity=".6" stroke-width="2"/></svg>
+    <svg class="dune d3" viewBox="0 0 1440 400" preserveAspectRatio="none"><defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a2a17"/><stop offset=".4" stop-color="#120d08"/><stop offset="1" stop-color="#070A0D"/></linearGradient></defs>
+      <path d="M0 345C240 290 380 355 620 322S980 280 1180 335 1380 345 1440 310V400H0Z" fill="url(#g3)"/><path d="M0 345C240 290 380 355 620 322S980 280 1180 335 1380 345 1440 310" fill="none" stroke="#D6B47A" stroke-opacity=".7" stroke-width="2"/></svg>
   </div>
 </div>
+<div class="tint" aria-hidden="true"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+<div class="grain" aria-hidden="true"></div>
+<div class="glow" aria-hidden="true"></div>
+<div id="progress" aria-hidden="true"></div>
 
-<canvas id="bg-canvas"></canvas>
+<!-- Preloader : bouclier + étoile -->
+<div id="preloader"><div class="pl">
+  <svg viewBox="0 0 100 110" fill="none" stroke-linejoin="round">
+    <path class="shield" d="M50 4L92 20V52Q92 82 50 106Q8 82 8 52V20Z" stroke="#28E0D0" stroke-width="2.4"/>
+    <path class="star" d="M50 34L64.1 77.4 27.2 50.6H72.8L35.9 77.4Z" stroke="#D6B47A" stroke-width="2.6"/>
+  </svg>
+  <h2>AISEC 2027</h2><p>The future rises from Sahara dunes</p>
+  <div class="pl-bar"><i id="pl-fill"></i></div><div class="pl-pct" id="pl-pct">0%</div>
+</div></div>
 
+<div id="page">
 <nav id="navbar">
-  <div class="fade-in">
-    <a href="../index.html" class="nav-logo">
-      <img src="../images/logos/aisec2026-w.png" alt="AISEC" class="nav-logo-img-custom" style="height:42px">
-    </a>
-  </div>
+  <a href="#hero" class="brand"><b>AISEC</b><span>7th edition</span></a>
   <ul class="nav-links">
-    <li><a href="#">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#jury">Jury</a></li>
-    <li><a href="#tracks">Tracks</a></li>
-    <li><a href="#participate">Participate</a></li>
+    <li><a href="#hero" data-s="hero">Home</a></li><li><a href="#about" data-s="about">About</a></li><li><a href="#jury" data-s="jury">Jury</a></li>
+    <li><a href="#tracks" data-s="tracks">Tracks</a></li><li><a href="#participate" data-s="participate">Participate</a></li>
   </ul>
-  <a href="https://forms.gle/PekPTzDi6UmSXzTR7" target="_blank" class="nav-cta">Register Now</a>
+  <a href="https://forms.gle/PekPTzDi6UmSXzTR7" target="_blank" rel="noopener" class="btn sm"><span>Register Now</span></a>
+  <button class="hamburger" id="ham" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
+<div class="mob-nav" id="mobnav">
+  <a href="#hero">Home</a><a href="#about">About</a><a href="#jury">Jury</a><a href="#tracks">Tracks</a><a href="#participate">Participate</a>
+  <a href="https://forms.gle/PekPTzDi6UmSXzTR7" target="_blank" rel="noopener">Register Now</a>
+</div>
 
-<!-- HERO -->
+<main>
 <section id="hero">
   <div class="hero-inner">
-    <div>
-      <div class="hero-badge"><span class="dot"></span> Registration Open — May 15, 2026</div>
-      <img src="../images/logos/aisec2026-w.png" alt="AISEC 2026" class="hero-logo-img">
+    <div class="hero-text">
+      <img class="hero-logo up" style="--d:.1s" src="images/aisec-logo.png" alt="AISEC — Artificial Intelligence &amp; Cybersecurity International Summit, 7th edition">
       <h1 class="hero-title">
-        <span class="l1">Hack</span>
-        <span class="l2">The</span>
-        <span class="l3">Intelligence</span>
+        <span class="l l1" data-split data-delay=".3">Hack</span>
+        <span class="l l2" data-split data-delay=".7">THE</span>
+        <span class="l l3 up" style="--d:1.1s">Intelligence</span>
       </h1>
-      <p class="hero-sub">
-        As part of the <strong>AISEC International Summit 2026</strong>, Hack The Intelligence is a national innovation competition bringing together ambitious students and innovators from across Morocco.
-      </p>
-      <div class="hero-btns">
-        <a href="https://forms.gle/PekPTzDi6UmSXzTR7" target="_blank" class="btn-primary">Register Now &rarr;</a>
-        <a href="#about" class="btn-outline">Learn More</a>
+      <p class="hero-sub up" style="--d:1.3s">As part of the <strong>AISEC International Summit 2027</strong>, Hack The Intelligence is a national innovation competition bringing together ambitious students and innovators from across Morocco.</p>
+      <div class="hero-btns up" style="--d:1.5s">
+        <a href="https://forms.gle/PekPTzDi6UmSXzTR7" target="_blank" rel="noopener" class="btn"><span>Register Now</span><i class="fas fa-arrow-right"></i></a>
+        <a href="#about" class="btn ghost"><span>Learn More</span></a>
       </div>
     </div>
+    <div class="stat-box up" style="--d:1.7s">
+      <div class="stat"><b data-count="4">4</b><span>Tracks</span></div>
+      <div class="stat"><b data-count="7" data-suffix="th">7th</b><span>Edition</span></div>
+      <div class="stat"><b data-count="1">1</b><span>Pitch Day</span></div>
+      <div class="stat"><b>∞</b><span>Impact</span></div>
+    </div>
   </div>
+  <a href="#about" class="scroll-cue up" style="--d:2.2s"><span class="m"></span>Scroll</a>
 </section>
 
-<!-- INFO BAR -->
-<div class="info-bar">
-  <div class="info-bar-inner">
-    <div class="info-item fade-in">
-      <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-      <div class="info-text"><b>Location</b><span>ENSA Marrakesh, Morocco</span></div>
-    </div>
-    <div class="info-item fade-in">
-      <div class="info-icon"><i class="far fa-calendar-alt"></i></div>
-      <div class="info-text"><b>Pitch Day</b><span>May 15, 2026</span></div>
-    </div>
-    <div class="info-item fade-in">
-      <div class="info-icon"><i class="fas fa-microchip"></i></div>
-      <div class="info-text"><b>Event</b><span>AISEC International Summit 2026</span></div>
-    </div>
-    <div class="info-item fade-in">
-      <div class="info-icon"><i class="fas fa-users"></i></div>
-      <div class="info-text"><b>Open To</b><span>Students &amp; Innovators</span></div>
-    </div>
+<div class="slogan"><p class="rv z">The future <em>rises</em> from Sahara dunes.</p></div>
+
+<div class="info-bar"><div class="info-inner">
+  <div class="info-item rv"><div class="info-icon"><i class="fas fa-map-marker-alt"></i></div><div class="info-text"><b>Location</b><span>Dakhla, Morocco</span></div></div>
+  <div class="info-item rv" style="--d:.08s"><div class="info-icon"><i class="far fa-calendar-alt"></i></div><div class="info-text"><b>Pitch Day</b><span>Date to be announced</span></div></div>
+  <div class="info-item rv" style="--d:.16s"><div class="info-icon"><i class="fas fa-microchip"></i></div><div class="info-text"><b>Event</b><span>AISEC International Summit 2027</span></div></div>
+  <div class="info-item rv" style="--d:.24s"><div class="info-icon"><i class="fas fa-users"></i></div><div class="info-text"><b>Open To</b><span>Students &amp; Innovators</span></div></div>
+</div></div>
+
+<section class="section" id="about"><div class="inner"><div class="about-grid">
+  <div class="about-text rv l">
+    <div class="tagline">About the Competition</div>
+    <h2 class="h2"><span class="sc">Welcome to</span> <span class="hl sc">Hack The Intelligence</span></h2><div class="rule"></div>
+    <p>Hack The Intelligence is a national innovation competition hosted as part of the <strong>AISEC International Summit 2027</strong> — the premier international conference on Artificial Intelligence and Cybersecurity.</p>
+    <p>Participants are encouraged to register, develop their projects in advance, and pitch their innovative ideas in front of a panel of experts and professionals from industry and academia.</p>
+    <p>Whether you're working on AI-powered security solutions, smart city innovations, IoT systems, or cybersecurity tools — this competition is your chance to turn ideas into impactful solutions.</p>
+    <div class="tags"><span class="tag t-teal">Cybersecurity</span><span class="tag t-ocean">Artificial Intelligence</span><span class="tag t-sand">IoT</span><span class="tag t-orange">Smart Cities</span></div>
+    <div style="margin-top:2rem"><a href="https://forms.gle/PekPTzDi6UmSXzTR7" target="_blank" rel="noopener" class="btn"><span>Register Your Team</span><i class="fas fa-arrow-right"></i></a></div>
   </div>
+  <div class="steps rv r">
+    <div class="step"><div class="step-num">01</div><div><h4>Register</h4><p>Sign up via the registration link and form your team. Solo participants are welcome too.</p></div></div>
+    <div class="step"><div class="step-num">02</div><div><h4>Build Your Project</h4><p>Develop your solution ahead of the event. Focus on real-world impact in one of the four competition tracks.</p></div></div>
+    <div class="step"><div class="step-num">03</div><div><h4>Pitch at AISEC 2027</h4><p>Present your innovation live in front of a panel of experts and professionals.</p></div></div>
+    <div class="step"><div class="step-num">04</div><div><h4>Make an Impact</h4><p>Connect with industry leaders, earn recognition, and showcase your creativity on a national stage.</p></div></div>
+  </div>
+</div></div></section>
+
+<section class="section alt" id="jury"><div class="inner">
+  <div class="tagline">Expert Panel</div>
+  <h2 class="h2"><span class="sc">Meet the</span> <span class="hl sc">Jury</span></h2><div class="rule"></div>
+  <div class="jury-soon rv"><i class="fas fa-hourglass-half"></i><div><b>Coming soon…</b><span>A panel of industry leaders, academics and cybersecurity experts will be revealed shortly.</span></div></div>
+</div></section>
+
+<section class="section" id="tracks"><div class="inner">
+  <div class="tagline">Competition Tracks</div>
+  <h2 class="h2"><span class="sc">Choose Your</span> <span class="hl sc">Challenge</span></h2><div class="rule"></div>
+  <p class="lead">Four cutting-edge domains. One chance to prove your innovation. Build solutions that address real-world challenges.</p>
+  <div class="tracks">
+    <div class="card track rv" style="--tc:#28E0D0"><div class="track-label">Track 01</div><div class="track-icon"><i class="fas fa-shield-alt"></i></div><h3>Cybersecurity</h3><p>Threat detection, vulnerability assessment, secure systems, and digital defense tools.</p></div>
+    <div class="card track rv" style="--tc:#35b6d4;--d:.1s"><div class="track-label">Track 02</div><div class="track-icon"><i class="fas fa-brain"></i></div><h3>Artificial Intelligence</h3><p>Machine learning, NLP, computer vision, and AI-driven automation solutions.</p></div>
+    <div class="card track rv" style="--tc:#D6B47A;--d:.2s"><div class="track-label">Track 03</div><div class="track-icon"><i class="fas fa-microchip"></i></div><h3>Internet of Things</h3><p>Connected devices, sensor networks, edge computing, and smart embedded systems.</p></div>
+    <div class="card track rv" style="--tc:#E47732;--d:.3s"><div class="track-label">Track 04</div><div class="track-icon"><i class="fas fa-city"></i></div><h3>Smart Cities</h3><p>Urban tech, mobility, infrastructure, and data-driven city innovation solutions.</p></div>
+  </div>
+</div></section>
+
+<section class="section alt" id="participate"><div class="inner">
+  <div class="tagline">How to Join</div>
+  <h2 class="h2"><span class="sc">Participate &amp;</span> <span class="hl sc">Compete</span></h2><div class="rule"></div>
+  <div class="content-cards">
+    <div class="card cc rv"><h3>Registration</h3><p>Register your team via our official Google Form. Individual participants are also welcome. You'll receive all guidelines and event details after signing up.</p><span class="mono">forms.gle/PekPTzDi6UmSXzTR7</span><div style="margin-top:1.2rem"><a href="https://forms.gle/PekPTzDi6UmSXzTR7" target="_blank" rel="noopener" class="btn sm"><span>Register</span><i class="fas fa-arrow-right"></i></a></div></div>
+    <div class="card cc rv" style="--d:.1s"><h3>Pitch Day — Date to be announced</h3><p>Present your project live in front of a jury of experts and professionals from industry and academia during the AISEC International Summit.</p><span class="mono">AISEC International Summit 2027 — 7th edition</span></div>
+    <div class="card cc rv" style="--d:.2s"><h3>Who Should Apply</h3><p>Engineering students, CS undergraduates, graduate researchers, and passionate innovators from any Moroccan institution. Multi-disciplinary teams are especially encouraged.</p></div>
+    <div class="card cc rv" style="--d:.3s"><h3>Contact &amp; Info</h3><p>For questions about the competition, reach the organizing team via the AISEC conference email address below.</p><p style="margin-top:.6rem">Contact: <a href="mailto:aisec@uca.ac.ma">aisec@uca.ac.ma</a></p><span class="mono">Subject: Hack The Intelligence — Inquiry</span></div>
+  </div>
+</div></section>
+
+<div class="cta"><div class="cta-glow"></div>
+  <h2 class="rv">Ready to Innovate?</h2><p class="rv" style="--d:.1s">Don't miss this opportunity to compete, connect, and make an impact.</p>
+  <a href="https://forms.gle/PekPTzDi6UmSXzTR7" target="_blank" rel="noopener" class="btn rv" style="--d:.2s"><span>Register for Hack The Intelligence</span><i class="fas fa-arrow-right"></i></a>
 </div>
+</main>
 
-<!-- ABOUT -->
-<section class="section" id="about">
-  <div class="section-inner">
-    <div class="about-grid">
-      <div class="about-text fade-in">
-        <div class="section-tag">About the Competition</div>
-        <h2 class="section-title">Welcome to <span class="hl">Hack The Intelligence</span></h2>
-        <div class="section-divider"></div>
-        <p>Hack The Intelligence is a national innovation competition hosted as part of the <strong style="color:var(--white);font-weight:500">AISEC International Summit 2026</strong> — the premier international conference on Artificial Intelligence and Cybersecurity.</p>
-        <p>Participants are encouraged to register, develop their projects in advance, and pitch their innovative ideas in front of a panel of experts and professionals from industry and academia.</p>
-        <p>Whether you're working on AI-powered security solutions, smart city innovations, IoT systems, or cybersecurity tools — this competition is your chance to turn ideas into impactful solutions.</p>
-        <div class="tags">
-          <span class="tag tag-cyan">Cybersecurity</span>
-          <span class="tag tag-blue">Artificial Intelligence</span>
-          <span class="tag tag-purple">IoT</span>
-          <span class="tag tag-green">Smart Cities</span>
-        </div>
-        <div style="margin-top:2rem"><a href="https://forms.gle/PekPTzDi6UmSXzTR7" target="_blank" class="btn-primary">Register Your Team &rarr;</a></div>
-      </div>
-      <div class="fade-in">
-        <div class="steps">
-          <div class="step-item"><div class="step-num">01</div><div><h4>Register</h4><p>Sign up via the registration link and form your team. Solo participants are welcome too.</p></div></div>
-          <div class="step-item"><div class="step-num">02</div><div><h4>Build Your Project</h4><p>Develop your solution ahead of the event. Focus on real-world impact in one of the four competition tracks.</p></div></div>
-          <div class="step-item"><div class="step-num">03</div><div><h4>Pitch at AISEC 2026</h4><p>Present your innovation live at ENSA Marrakesh on May 15, 2026 in front of a panel of experts and professionals.</p></div></div>
-          <div class="step-item"><div class="step-num">04</div><div><h4>Make an Impact</h4><p>Connect with industry leaders, earn recognition, and showcase your creativity on a national stage.</p></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- JURY -->
-<section class="section alt" id="jury">
-  <div class="section-inner">
-    <div class="section-tag">Expert Panel</div>
-    <h2 class="section-title">Meet the <span class="hl">Jury</span></h2>
-    <div class="section-divider"></div>
-            <!--
-
-    <p style="color:var(--gray);max-width:540px;line-height:1.85;font-size:.95rem;margin-bottom:2.5rem">A distinguished panel of industry leaders, academics, and cybersecurity experts will evaluate your innovations at AISEC 2026.</p>
-        -->
-
-    <p style="color:var(--gray);max-width:540px;line-height:1.85;font-size:.95rem;margin-bottom:2.5rem">Coming Soon ...</p>
-
-    <div style="position:relative;display:flex;align-items:center;gap:1rem">
-      <button id="juryPrev" onclick="juryShift(-1)" aria-label="Previous" style="width:40px;height:40px;border-radius:4px;border:1px solid var(--border);background:var(--card);color:var(--accent);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s;flex-shrink:0">&#8592;</button>
-
-      <div style="overflow:hidden;flex:1" id="juryViewport">
-        <div id="juryTrack" style="display:grid;grid-template-rows:1fr 1fr;grid-auto-flow:column;grid-auto-columns:calc((100% - 4*1rem)/4.5);gap:1rem;transition:transform .45s cubic-bezier(.4,0,.2,1)">
-
-          <!-- CARD TEMPLATE — repeat for each jury member -->
-          <!--
-          <div class="jury-card" style="background:var(--card);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color .25s,transform .25s">
-            <div style="position:relative;aspect-ratio:1/1;overflow:hidden;background:#0d1626">
-              <img src="../images/speakers/kc-profile.webp" alt="KC Santosh" loading="lazy" style="width:100%;height:100%;object-fit:cover;filter:grayscale(20%);transition:filter .3s,transform .3s">
-              <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 55%,rgba(6,8,15,.85));pointer-events:none"></div>
-            </div>
-            <div style="padding:.85rem 1rem 1rem">
-              <div style="font-family:var(--font-head);font-weight:700;font-size:.88rem;margin-bottom:.3rem">KC Santosh</div>
-              <div style="font-family:var(--font-mono);font-size:.62rem;letter-spacing:.06em;color:var(--gray);text-transform:uppercase">Chair — CS Dept. — Univ. of South Dakota</div>
-            </div>
-          </div>
-          -->
-        </div>
-      </div>
-
-      <button id="juryNext" onclick="juryShift(1)" aria-label="Next" style="width:40px;height:40px;border-radius:4px;border:1px solid var(--border);background:var(--card);color:var(--accent);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s;flex-shrink:0">&#8594;</button>
-    </div>
-
-    <div id="juryDots" style="display:flex;justify-content:center;gap:.5rem;margin-top:1.5rem"></div>
-  </div>
-</section>
-
-<!-- TRACKS -->
-<section class="section alt" id="tracks">
-  <div class="section-inner">
-    <div class="section-tag">Competition Tracks</div>
-    <h2 class="section-title">Choose Your <span class="hl">Challenge</span></h2>
-    <div class="section-divider"></div>
-    <p style="color:var(--gray);max-width:540px;line-height:1.85;font-size:.95rem">Four cutting-edge domains. One chance to prove your innovation. Build solutions that address real-world challenges.</p>
-    <div class="tracks-grid">
-      <div class="track-card fade-in" style="--tc:#4f8ef7">
-        <div class="track-label">Track 01</div>
-        <div class="track-icon"><i class="fas fa-shield-alt" style="color:#4f8ef7"></i></div>
-        <h3>Cybersecurity</h3>
-        <p>Threat detection, vulnerability assessment, secure systems, and digital defense tools.</p>
-      </div>
-      <div class="track-card fade-in" style="--tc:#9b6dff">
-        <div class="track-label">Track 02</div>
-        <div class="track-icon"><i class="fas fa-brain" style="color:#9b6dff"></i></div>
-        <h3>Artificial Intelligence</h3>
-        <p>Machine learning, NLP, computer vision, and AI-driven automation solutions.</p>
-      </div>
-      <div class="track-card fade-in" style="--tc:#00c8ff">
-        <div class="track-label">Track 03</div>
-        <div class="track-icon"><i class="fas fa-microchip" style="color:#00c8ff"></i></div>
-        <h3>Internet of Things</h3>
-        <p>Connected devices, sensor networks, edge computing, and smart embedded systems.</p>
-      </div>
-      <div class="track-card fade-in" style="--tc:#3cf7a0">
-        <div class="track-label">Track 04</div>
-        <div class="track-icon"><i class="fas fa-city" style="color:#3cf7a0"></i></div>
-        <h3>Smart Cities</h3>
-        <p>Urban tech, mobility, infrastructure, and data-driven city innovation solutions.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PARTICIPATE -->
-<section class="section" id="participate">
-  <div class="section-inner">
-    <div class="section-tag">How to Join</div>
-    <h2 class="section-title">Participate &amp; <span class="hl">Compete</span></h2>
-    <div class="section-divider"></div>
-    <div class="content-cards">
-      <div class="content-card fade-in">
-        <h3>Registration</h3>
-        <p>Register your team via our official Google Form. Individual participants are also welcome. You'll receive all guidelines and event details after signing up.</p>
-        <span class="mono-tag">forms.gle/PekPTzDi6UmSXzTR7</span>
-        <div style="margin-top:1.2rem"><a href="https://forms.gle/PekPTzDi6UmSXzTR7" target="_blank" class="btn-primary" style="font-size:.78rem;padding:10px 20px">Register &rarr;</a></div>
-      </div>
-      <div class="content-card fade-in">
-        <h3>Pitch Day — May 15, 2026</h3>
-        <p>Present your project live at ENSA Marrakesh in front of a jury of experts and professionals from industry and academia during the AISEC International Summit.</p>
-        <span class="mono-tag">AISEC International Summit 2026 — ENSA Marrakesh</span>
-      </div>
-      <div class="content-card fade-in">
-        <h3>Who Should Apply</h3>
-        <p>Engineering students, CS undergraduates, graduate researchers, and passionate innovators from any Moroccan institution. Multi-disciplinary teams are especially encouraged.</p>
-      </div>
-      <div class="content-card fade-in">
-        <h3>Contact &amp; Info</h3>
-        <p>For questions about the competition, reach the organizing team via the AISEC conference email address below.</p>
-        <p style="margin-top:.6rem">Contact: <a href="mailto:aisec@uca.ac.ma">aisec@uca.ac.ma</a></p>
-        <span class="mono-tag">Subject: Hack The Intelligence — Inquiry</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<div class="cta-section">
-  <div class="cta-glow"></div>
-  <h2>Ready to Innovate?</h2>
-  <p>Don't miss this opportunity to compete, connect, and make an impact.</p>
-  <a href="https://forms.gle/PekPTzDi6UmSXzTR7" target="_blank" class="btn-primary">Register for Hack The Intelligence &rarr;</a>
-</div>
-
-<!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <img src="../images/logos/aisec2026-w.png" alt="AISEC" class="footer-logo-img" style="height:48px">
-      <div class="logo" style="margin-top: 8px;">Hack The <span>Intelligence</span></div>
-      <p>National Innovation Competition<br>As part of the AISEC International Summit 2026<br>ENSA — Cadi Ayyad University, Marrakech, Morocco</p>
-    </div>
-    <div class="footer-col">
-      <h5>Competition</h5>
-      <a href="#about">About</a>
-      <a href="#tracks">Tracks</a>
-      <a href="#participate">How to Join</a>
-      <a href="https://forms.gle/PekPTzDi6UmSXzTR7" target="_blank">Register</a>
-    </div>
-    <div class="footer-col">
-      <h5>AISEC 2026</h5>
-      <a href="#">Conference</a>
-      <a href="#">Schedule</a>
-      <a href="#">Venue</a>
-      <a href="#">Speakers</a>
-    </div>
-    <div class="footer-col">
-      <h5>Contact</h5>
-      <a href="mailto:aisec@uca.ac.ma">aisec@uca.ac.ma</a>
-      <a href="https://ensa-marrakech.uca.ma/en/" target="_blank">ENSA Marrakech</a>
-      <a href="https://www.uca.ma/fr" target="_blank">Cadi Ayyad University</a>
-    </div>
+  <div class="f-inner">
+    <div class="f-brand"><img src="images/aisec-logo.png" alt="AISEC"><div class="name">Hack The <span>Intelligence</span></div>
+      <p>National Innovation Competition<br>As part of the AISEC International Summit 2027<br>ENSA — Cadi Ayyad University, Marrakech, Morocco</p></div>
+    <div class="f-col"><h5>Competition</h5><a href="#about">About</a><a href="#tracks">Tracks</a><a href="#participate">How to Join</a><a href="https://forms.gle/PekPTzDi6UmSXzTR7" target="_blank" rel="noopener">Register</a></div>
+    <div class="f-col"><h5>AISEC 2027</h5><a href="https://aisec.uca.ma/" target="_blank" rel="noopener">Conference</a><a href="#">Schedule</a><a href="#">Venue</a><a href="#">Speakers</a></div>
+    <div class="f-col"><h5>Contact</h5><a href="mailto:aisec@uca.ac.ma">aisec@uca.ac.ma</a><a href="https://ensa-marrakech.uca.ma/en/" target="_blank" rel="noopener">ENSA Marrakech</a><a href="https://www.uca.ma/fr" target="_blank" rel="noopener">Cadi Ayyad University</a></div>
   </div>
-  <div class="footer-bottom">
-    <p>&copy; 2026 <span>AISEC International Summit</span> — All rights reserved</p>
-    <p><span>ENSA Marrakech</span> • Cadi Ayyad University</p>
-  </div>
+  <div class="f-bottom"><p>&copy; 2027 <span>AISEC International Summit</span> — All rights reserved</p><p><span>ENSA Marrakech</span> • Cadi Ayyad University</p></div>
 </footer>
-
-<script>
-
-/* ════════════════════════════════════════════
-   SHIELD PRELOADER — Matrix Rain + Progress
-════════════════════════════════════════════ */
-(function () {
-
-  /* ── Matrix Rain (blue-sky palette) ── */
-  const mc  = document.getElementById('bt-matrix');
-  const mct = mc.getContext('2d');
-  let MW, MH, cols, drops;
-  const SZ    = 14;
-  const CHARS = '01001101 01101111 01110101 01110010 01100001 01100100 00100000 01000101 01101100 00100000 01001111 01110101 01100001 01110100 01101001 01101011 00100000 00110001 00110101 00110000 00110101 00110010 00110000 00110010 00110101';
-
-  function matrixInit() {
-    MW = mc.width  = window.innerWidth;
-    MH = mc.height = window.innerHeight;
-    cols  = Math.floor(MW / SZ) + 1;
-    drops = Array.from({ length: cols }, () => -(Math.random() * MH / SZ));
-  }
-
-  function matrixTick() {
-    mct.fillStyle = 'rgba(2,13,26,.06)';
-    mct.fillRect(0, 0, MW, MH);
-    mct.font = SZ + 'px "Share Tech Mono", monospace';
-
-    for (let i = 0; i < cols; i++) {
-      const y = drops[i] * SZ;
-      const r = Math.random();
-
-      if (r > .96) {
-        mct.fillStyle = '#e0f8ff';
-        mct.shadowColor = '#00c8ff'; mct.shadowBlur = 14;
-      } else if (r > .75) {
-        mct.fillStyle = '#00c8ff';
-        mct.shadowColor = '#00c8ff'; mct.shadowBlur = 6;
-      } else if (r > .45) {
-        mct.fillStyle = '#0077aa';
-        mct.shadowBlur = 0;
-      } else {
-        mct.fillStyle = '#003f5c';
-        mct.shadowBlur = 0;
-      }
-
-      const ch = CHARS[Math.floor(Math.random() * CHARS.length)];
-      mct.fillText(ch, i * SZ, y);
-      mct.shadowBlur = 0;
-
-      if (y > MH && Math.random() > .967) drops[i] = 0;
-      drops[i] += Math.random() * .55 + .25;
-    }
-  }
-
-  matrixInit();
-  window.addEventListener('resize', matrixInit);
-  const matrixInterval = setInterval(matrixTick, 45);
-
-  /* ── Progress bar ── */
-  const prog = document.getElementById('bt-prog');
-  const pctEl = document.getElementById('bt-pct');
-  let pctVal = 0;
-  const pctTarget = 100;
-  const DURATION = 2800; // ms total
-  const START = performance.now();
-
-  function updateProgress(now) {
-    const elapsed = now - START;
-    const p = Math.min((elapsed / DURATION) * 100, 100);
-    if (prog)  prog.style.width = p + '%';
-    if (pctEl) pctEl.textContent = Math.round(p) + '%';
-    if (p < 100) requestAnimationFrame(updateProgress);
-  }
-  requestAnimationFrame(updateProgress);
-
-  /* ── Dismiss ── */
-  document.body.style.overflow = 'hidden';
-
-  setTimeout(() => {
-    const pre = document.getElementById('bt-preloader');
-    pre.style.transition = 'opacity .65s ease';
-    pre.style.opacity = '0';
-    setTimeout(() => {
-      pre.style.display = 'none';
-      document.body.style.overflow = '';
-      clearInterval(matrixInterval);
-    }, 650);
-  }, 3000);
-
-})();
-
-// canvas particle background (glowing lines and dots)
-const canvas=document.getElementById('bg-canvas');
-const ctx=canvas.getContext('2d');
-let W,H;
-function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight}
-resize();window.addEventListener('resize',resize);
-
-const COLORS=['#00c8ff','#4f8ef7','#9b6dff','#ffffff'];
-const particles=Array.from({length:120},()=>mkParticle());
-function mkParticle(){
-  return{
-    x:Math.random()*window.innerWidth,y:Math.random()*window.innerHeight,
-    vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,
-    r:Math.random()*1.4+.3,
-    a:Math.random()*.45+.15,
-    c:COLORS[Math.floor(Math.random()*COLORS.length)]
-  }
-}
-function animate(){
-  ctx.clearRect(0,0,W,H);
-  for(let i=0;i<particles.length;i++){
-    for(let j=i+1;j<particles.length;j++){
-      const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y;
-      const d=Math.sqrt(dx*dx+dy*dy);
-      if(d<120){
-        ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);
-        ctx.strokeStyle=`rgba(0,200,255,${(.07*(1-d/120)).toFixed(3)})`;
-        ctx.lineWidth=.5;ctx.stroke();
-      }
-    }
-  }
-  particles.forEach(p=>{
-    p.x+=p.vx;p.y+=p.vy;
-    if(p.x<0||p.x>W)p.vx*=-1;
-    if(p.y<0||p.y>H)p.vy*=-1;
-    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    ctx.fillStyle=p.c;ctx.globalAlpha=p.a;ctx.fill();ctx.globalAlpha=1;
-  });
-  requestAnimationFrame(animate);
-}
-animate();
-
-// Intersection Observer for fade-in
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})
-},{threshold:.1});
-document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
-</script>
+</div>
+<a id="btt" href="#" aria-label="Back to top"><i class="fas fa-chevron-up"></i></a>
+<script src="js/main.js"></script>
 </body>
 </html>

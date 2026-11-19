@@ -3,21 +3,20 @@
    ═══════════════════════════════════════════════ */
 
 /* ── Fonts ──────────────────────────────────────
-   Titres : Shinkansen (déposer le fichier dans /fonts : Shinkansen.woff2 / .otf / .ttf)
-   Repli automatique : Orbitron (même esprit techno-carré)
-   Texte  : Exo 2 (léger, proche de Shinkansen)                */
+   Grands titres : dossier principal
+   Texte et éléments secondaires : dossier secondaire                */
 @font-face {
-  font-family: 'Shinkansen';
-  src: url('../fonts/Shinkansen.woff2') format('woff2'),
-       url('../fonts/Shinkansen.otf') format('opentype'),
-       url('../fonts/Shinkansen.ttf') format('truetype');
+  font-family: 'Ctf Principal';
+  src: url('../fonts/principal/variable/reem-kufi-latin-wght-normal.woff2') format('woff2');
+  font-weight: 400 700;
   font-display: swap;
 }
-@font-face { font-family: 'Orbitron'; font-weight: 700; font-display: swap; src: url('../fonts/orbitron-latin-700-normal.woff2') format('woff2'); }
-@font-face { font-family: 'Orbitron'; font-weight: 900; font-display: swap; src: url('../fonts/orbitron-latin-900-normal.woff2') format('woff2'); }
-@font-face { font-family: 'Exo 2'; font-weight: 300; font-display: swap; src: url('../fonts/exo-2-latin-300-normal.woff2') format('woff2'); }
-@font-face { font-family: 'Exo 2'; font-weight: 400; font-display: swap; src: url('../fonts/exo-2-latin-400-normal.woff2') format('woff2'); }
-@font-face { font-family: 'Exo 2'; font-weight: 600; font-display: swap; src: url('../fonts/exo-2-latin-600-normal.woff2') format('woff2'); }
+@font-face {
+  font-family: 'Ctf Secondaire';
+  src: url('../fonts/secondaire/variable/handjet-latin-wght-normal.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
 
 :root {
   --red:      #e3101c;
@@ -32,8 +31,8 @@
   --muted:    rgba(251, 236, 228, .74);
   --line:     rgba(244, 201, 122, .26);
   --card:     rgba(26, 4, 10, .62);
-  --title:    'Shinkansen', 'Orbitron', sans-serif;
-  --body:     'Exo 2', system-ui, sans-serif;
+  --title:    'Ctf Secondaire', sans-serif;
+  --body:     'Ctf Secondaire', sans-serif;
   --tint:     0;           /* piloté par JS : 0 sur le hero → ~1 sur le reste */
   --mx: 0; --my: 0;
 }
@@ -135,7 +134,7 @@ body[data-page="inner"] { --tint: 1; }
   color: var(--sand); margin-bottom: 1.3rem; text-shadow: 0 2px 10px rgba(0,0,0,.45); }
 .live-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--sand); box-shadow: 0 0 0 0 var(--sand-dim); animation: ping 1.8s infinite; }
 @keyframes ping { 0%{box-shadow:0 0 0 0 rgba(244,201,122,.7)} 100%{box-shadow:0 0 0 14px rgba(244,201,122,0)} }
-.hero-title { font-family: var(--title); font-weight: 900; text-transform: uppercase; line-height: .98; letter-spacing: .02em;
+.hero-title { font-family: 'Ctf Principal', var(--title); font-weight: 900; text-transform: uppercase; line-height: .98; letter-spacing: .02em;
   font-size: clamp(2.5rem, 5.7vw, 6.6rem); color: #fff; text-shadow: 0 4px 30px rgba(60, 0, 5, .55), 0 0 2px rgba(0,0,0,.4); }
 .hero-title .line { display: block; white-space: nowrap; }
 .hero-title .year { color: var(--sand); text-shadow: 0 0 40px rgba(244, 201, 122, .5), 0 4px 26px rgba(60,0,5,.5); }
@@ -192,7 +191,7 @@ body.ready .hero-in { opacity: 1; transform: none; }
 .sec-head.center { text-align: center; }
 .tag { display: inline-flex; align-items: center; gap: .7rem; font-weight: 600; font-size: .74rem; letter-spacing: .34em; text-transform: uppercase; color: var(--sand); margin-bottom: .8rem; }
 .tag::before { content: ''; width: 28px; height: 2px; background: var(--sand); }
-.sec-h { font-family: var(--title); font-weight: 900; text-transform: uppercase; font-size: clamp(1.9rem, 4.4vw, 3.3rem); line-height: 1.05; letter-spacing: .03em; color: #fff; }
+.sec-h { font-family: 'Ctf Principal', var(--title); font-weight: 900; text-transform: uppercase; font-size: clamp(1.9rem, 4.4vw, 3.3rem); line-height: 1.05; letter-spacing: .03em; color: #fff; }
 .sec-h .a { color: var(--sand); text-shadow: 0 0 30px rgba(244,201,122,.35); }
 .rule { width: 70px; height: 3px; margin-top: 1rem; background: linear-gradient(90deg, var(--red), var(--sand)); transform-origin: 0 50%; }
 .center .rule { margin-inline: auto; }
@@ -297,7 +296,7 @@ footer .a { color: var(--sand); }
 
 /* Instructions page */
 .page-hero { padding: 9.5rem 2.5rem 4rem; position: relative; }
-.ph-title { font-family: var(--title); font-weight: 900; text-transform: uppercase; font-size: clamp(2.2rem, 6.5vw, 5rem); line-height: 1; letter-spacing: .03em; color: #fff; }
+.ph-title { font-family: 'Ctf Principal', var(--title); font-weight: 900; text-transform: uppercase; font-size: clamp(2.2rem, 6.5vw, 5rem); line-height: 1; letter-spacing: .03em; color: #fff; }
 .ph-title .a { color: var(--sand); }
 .i-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2rem; }
 .i-wide { grid-column: 1 / -1; }
