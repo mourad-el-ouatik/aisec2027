@@ -133,7 +133,7 @@ nav.scrolled{background:rgba(198,209,219,.94);backdrop-filter:blur(16px);border-
 }
 .hero-meta-item {
   font-family: var(--font-mono);
-  font-size: .9rem;
+  font-size: 5rem;
   color: rgba(200,220,255,.65);
   letter-spacing: 1.5px;
   display: flex;
@@ -142,7 +142,7 @@ nav.scrolled{background:rgba(198,209,219,.94);backdrop-filter:blur(16px);border-
 }
 .hero-meta-item::before {
   content: '';
-  width: 4px; height: 4px;
+  width: 8px; height: 4px;
   border-radius: 50%;
   background: #7ab8ff;
   opacity: .55;
@@ -789,7 +789,7 @@ nav .hero-logo img{height:42px;filter:none}
 .hero-title .outline{-webkit-text-stroke:1.5px var(--signal);color:transparent}
 @keyframes hero-title-reveal{from{opacity:0;clip-path:inset(100% 0 0 0);transform:translateY(18px)}to{opacity:1;clip-path:inset(0);transform:translateY(0)}}
 .hero-meta{display:flex;flex-direction:column;align-items:flex-start;gap:.5rem;margin:1.75rem 0 1.5rem}
-.hero-meta-item{font-size:.68rem;color:rgba(244,239,229,.82);letter-spacing:.12em}
+.hero-meta-item{font-size:1rem;color:rgba(244,239,229,.82);letter-spacing:.12em}
 .hero-meta-item::before{display:none}
 .hero-subtitle{font-family:var(--font-body);font-size:clamp(1.05rem,1.6vw,1.35rem);color:var(--ivory)!important;letter-spacing:.04em;margin-bottom:1.75rem}
 .hero-btns{gap:.75rem}
