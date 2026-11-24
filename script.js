@@ -1,6 +1,6 @@
 const AISEC_CONFIG={
-  eventDate:'2027-05-04T09:00:00+01:00',   // countdown target
-  startDate:'2027-05-04T00:00:00+01:00'    // when the countdown disappears and "Day 01" starts
+  eventDate:'2027-05-07T09:00:00+01:00',   // countdown target
+  startDate:'2027-05-07T00:00:00+01:00'    // when the countdown disappears and "Day 01" starts
 };
 const navbar=document.getElementById('navbar');
 window.addEventListener('scroll',()=>navbar?.classList.toggle('scrolled',window.scrollY>40),{passive:true});

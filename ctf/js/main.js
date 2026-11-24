@@ -153,10 +153,10 @@
     });
   });
 
-  /* ── Compte à rebours : 6 mai 2027 ── */
+  /* ── Compte à rebours : 8 mai 2027 à 21h00 ── */
   const ids = ['d', 'h', 'm', 's'].map(k => $('#cd-' + k));
   if (ids[0]) {
-    const target = new Date('2027-05-06T09:00:00+01:00').getTime(); const prev = [];
+    const target = new Date('2027-05-08T21:00:00+01:00').getTime(); const prev = [];
     const upd = () => {
       let diff = Math.max(0, target - Date.now());
       const v = [Math.floor(diff / 864e5), Math.floor(diff / 36e5) % 24, Math.floor(diff / 6e4) % 60, Math.floor(diff / 1e3) % 60].map(n => String(n).padStart(2, '0'));

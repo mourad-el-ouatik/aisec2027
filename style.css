@@ -315,7 +315,6 @@ nav.scrolled{background:rgba(198,209,219,.94);backdrop-filter:blur(16px);border-
 .countdown-bar {
   display: flex;
   gap: 0;
-  margin-top: 2.8rem;
   background: rgba(6,14,46,.6);
   border: 1px solid rgba(122,184,255,.18);
   border-radius: 8px;
@@ -789,7 +788,7 @@ nav .hero-logo img{height:42px;filter:none}
 .hero-title .outline{-webkit-text-stroke:1.5px var(--signal);color:transparent}
 @keyframes hero-title-reveal{from{opacity:0;clip-path:inset(100% 0 0 0);transform:translateY(18px)}to{opacity:1;clip-path:inset(0);transform:translateY(0)}}
 .hero-meta{display:flex;flex-direction:column;align-items:flex-start;gap:.5rem;margin:1.75rem 0 1.5rem}
-.hero-meta-item{font-size:1rem;color:rgba(244,239,229,.82);letter-spacing:.12em}
+.hero-meta-item{font-size:1.4rem;color:rgba(244,239,229,.82);letter-spacing:.12em}
 .hero-meta-item::before{display:none}
 .hero-subtitle{font-family:var(--font-body);font-size:clamp(1.05rem,1.6vw,1.35rem);color:var(--ivory)!important;letter-spacing:.04em;margin-bottom:1.75rem}
 .hero-btns{gap:.75rem}
@@ -798,7 +797,7 @@ nav .hero-logo img{height:42px;filter:none}
 .btn-primary:hover{background:var(--clay);border-color:var(--clay);box-shadow:var(--glow-sunset);transform:translateY(-2px)}
 .btn-outline{border-color:rgba(244,239,229,.6);background:transparent;color:var(--ivory)}
 .btn-outline:hover{border-color:var(--signal);color:var(--signal);background:transparent;transform:translateY(-2px)}
-.countdown-bar{margin-top:2.5rem;background:transparent;border:0;border-radius:0;backdrop-filter:none}
+.countdown-bar{margin-bottom:2.5rem;background:transparent;border:0;border-radius:0;backdrop-filter:none}
 .countdown-item{padding:.75rem 1rem 0 0;text-align:left;min-width:78px}
 .countdown-item + .countdown-item{border-left:0;border-left:1px solid var(--line-dark);padding-left:1rem}
 .countdown-num{font-size:1.4rem;color:var(--sand);text-shadow:none}
@@ -822,7 +821,7 @@ nav .hero-logo img{height:42px;filter:none}
   .hero-status,.hero-date-note{font-size:.56rem;bottom:1rem}
   .hero-date-note{display:none}
   .hero-status{max-width:65%}
-  .countdown-bar{margin-top:1.5rem}
+  .countdown-bar{margin-bottom:1.5rem}
   .countdown-item{min-width:65px;padding-right:.65rem}.countdown-item + .countdown-item{padding-left:.65rem}
 }
 
