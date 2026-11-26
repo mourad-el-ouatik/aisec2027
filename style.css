@@ -247,7 +247,7 @@ nav.scrolled{background:rgba(198,209,219,.94);backdrop-filter:blur(16px);border-
 
 .hero-subtitle {
   color: var(--hero-muted);
-  font-size: .97rem;
+  font-size: 1.2rem;
   margin-bottom: 2.5rem;
   max-width: 480px;
   line-height: 1.88;
@@ -790,7 +790,7 @@ nav .hero-logo img{height:42px;filter:none}
 .hero-meta{display:flex;flex-direction:column;align-items:flex-start;gap:.5rem;margin:1.75rem 0 1.5rem}
 .hero-meta-item{font-size:1.4rem;color:rgba(244,239,229,.82);letter-spacing:.12em}
 .hero-meta-item::before{display:none}
-.hero-subtitle{font-family:var(--font-body);font-size:clamp(1.05rem,1.6vw,1.35rem);color:var(--ivory)!important;letter-spacing:.04em;margin-bottom:1.75rem}
+.hero-subtitle{font-family:var(--font-body);font-size:clamp(1rem,1.6vw,1.35rem);color:var(--ivory)!important;letter-spacing:.04em;margin-bottom:1.75rem}
 .hero-btns{gap:.75rem}
 .btn-primary,.btn-outline{border-radius:var(--radius-sm);padding:.9rem 1.25rem;min-height:44px;font-size:.68rem;letter-spacing:.12em}
 .btn-primary{background:var(--sunset);color:var(--void);border:1px solid var(--sunset);box-shadow:none}
